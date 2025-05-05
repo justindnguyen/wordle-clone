@@ -8,6 +8,16 @@ const useWordle = (solution) => {
     const [isCorrect, setIsCorrect] = useState(false);
     const [usedKeys, setUsedKeys] = useState({}) // {a: 'green', b: 'yellow', c: 'grey'}
 
+    const validateWord = async (word) => {
+        try {
+            const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+            return res.ok; // true if word exists
+        } catch (err) {
+            console.error('Word validation failed:', err);
+            return false;
+        }
+    };
+      
     // Format the guess into an array of letter objects
     // e.g. [{key: 'a', color: 'yellow'}, {key: 'b', color: 'green'}]
     const formatGuess = () => {
@@ -85,7 +95,7 @@ const useWordle = (solution) => {
 
     // Handle keyup event and track current guess
     // If user presses enter, add the new guess
-    const handleKeyup = ({ key }) => { 
+    const handleKeyup = async ({ key }) => { 
         if (key === 'Enter') {
             // Only add guess if turn is less than 5
             if (turn > 5) {
@@ -102,6 +112,13 @@ const useWordle = (solution) => {
                 console.log('Word must be 5 characters long!');
                 return;
             }
+            // Word validation with API
+            const isValid = await validateWord(currentGuess);
+            if (!isValid) {
+              alert('Not a valid word');
+              return;
+            }
+
             const formatted = formatGuess();
             addNewGuess(formatted);
         }
