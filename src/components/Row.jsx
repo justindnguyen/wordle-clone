@@ -1,4 +1,4 @@
-export default function Row({ guess, currentGuess }) {
+export default function Row({ guess, currentGuess, shake }) {
     if (guess) {
         return (
             <div className="row past">
@@ -13,7 +13,7 @@ export default function Row({ guess, currentGuess }) {
         let letters = currentGuess.split('');
 
         return (
-            <div className="row current">
+            <div className={`row current ${shake ? 'shake' : ''}`}>
                 {letters.map((letter, index) => (
                     <div key={index} className="filled">{letter}</div>
                 ))}

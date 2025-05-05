@@ -6,6 +6,7 @@ import Modal from './Modal'
 
 export default function Wordle({ solution }) {
     const [message, setMessage] = useState('');
+    const [shakeRow, setShakeRow] = useState(false);
     const { turn, currentGuess, guesses, isCorrect, usedKeys, handleKeyup } = useWordle(solution, setMessage);
     const [showModal, setShowModal] = useState(false);
 
@@ -27,14 +28,18 @@ export default function Wordle({ solution }) {
 
     useEffect(() => {
         if (message) {
-            const timer = setTimeout(() => setMessage(''), 2000);
+            setShakeRow(true);
+            const timer = setTimeout(() => {
+                setMessage('');
+                setShakeRow(false);
+            }, 2000);
             return () => clearTimeout(timer);
         }
     }, [message]);
 
     return (
         <div>
-            <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} />
+            <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} shakeRow={shakeRow} />
             <Keypad usedKeys={usedKeys} />
             <div className={`message ${message ? 'show' : ''}`}>{message}</div>
             {showModal && <Modal isCorrect={isCorrect} turn={turn} solution={solution} />}
