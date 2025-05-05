@@ -146,6 +146,27 @@ h1 {
   background-color: #6aaa64;
 }
 
+.message {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-weight: bold;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 1000;
+}
+
+.message.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 /* Animations */
 @keyframes flip {
   0% {

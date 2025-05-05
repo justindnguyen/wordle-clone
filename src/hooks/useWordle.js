@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const useWordle = (solution) => {
+const useWordle = (solution, setMessage) => {
     const [turn, setTurn] = useState(0);
     const [currentGuess, setCurrentGuess] = useState('');
     const [guesses, setGuesses] = useState([...Array(6)]); // Array of objects with keys and colors
@@ -99,23 +99,23 @@ const useWordle = (solution) => {
         if (key === 'Enter') {
             // Only add guess if turn is less than 5
             if (turn > 5) {
-                console.log('You have used all your guesses!');
+                setMessage('You have used all your guesses!');
                 return;
             }
             // Do not allow duplicate guesses
             if (history.includes(currentGuess)) {
-                console.log('You have already guessed that word!');
+                setMessage('You have already guessed that word!');
                 return;
             }
             // Check word is 5 chars long
             if (currentGuess.length !== 5) {
-                console.log('Word must be 5 characters long!');
+                setMessage('Word must be 5 characters long!');
                 return;
             }
             // Word validation with API
             const isValid = await validateWord(currentGuess);
             if (!isValid) {
-              alert('Not a valid word');
+              setMessage('Not a valid word.')
               return;
             }
 
