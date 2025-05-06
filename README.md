@@ -73,7 +73,7 @@ npm install
 ### 3. Start the JSON Server
 
 ```bash
-npx json-server --watch data/db.json --port 3001
+npm run api
 ```
 
 ### 4. Start the development server

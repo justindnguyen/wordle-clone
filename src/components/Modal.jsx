@@ -11,7 +11,7 @@ export default function Modal({ isCorrect, turn, solution}) {
             )}
             {!isCorrect && (
                 <div>
-                    <h1>Nevermind!</h1>
+                    <h1>Sorry!</h1>
                     <p className="solution">{solution}</p>
                     <p>Better luck next time! 😉</p>
                     <button onClick={() => window.location.reload()}>Play Again</button>

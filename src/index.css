@@ -1,3 +1,8 @@
+.App {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
 body {
   text-align: center;
   font-size: 1em;
@@ -9,7 +14,7 @@ body {
 }
 
 h1 {
-  font-size: 2rem;
+  font-size: 2.5rem;
   padding: 20px 0;
   border-bottom: 2px solid #3a3a3c;
   margin: 0 0 30px 0;
@@ -21,21 +26,21 @@ h1 {
 .row {
   display: flex;
   justify-content: center;
-  gap: 6px;
-  margin-bottom: 6px;
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
 .row > div {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   background: #121213;
   border: 2px solid #3a3a3c;
   color: white;
   font-weight: bold;
-  font-size: 2rem;
+  font-size: 2.4rem;
   text-transform: uppercase;
   text-align: center;
-  line-height: 60px;
+  line-height: 80px;
   transition: background 0.3s, transform 0.3s;
 }
 
@@ -77,14 +82,14 @@ h1 {
 }
 
 .keypad > div {
-  width: 40px;
-  height: 50px;
+  width: 48px;
+  height: 60px;
   background: #818384;
   color: white;
   border-radius: 6px;
-  line-height: 50px;
+  line-height: 60px;
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 1.2rem;
   user-select: none;
   transition: all 0.2s ease;
 }
@@ -207,4 +212,28 @@ h1 {
 
 .row.shake {
   animation: shake 0.4s ease;
+}
+
+@media (max-width: 600px) {
+  .row > div {
+    width: 50px;
+    height: 50px;
+    font-size: 1.6rem;
+    line-height: 50px;
+  }
+
+  .keypad > div {
+    width: 36px;
+    height: 45px;
+    font-size: 0.9rem;
+    line-height: 45px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .App {
+    padding: 0 10px;
+  }
 }
