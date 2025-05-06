@@ -139,7 +139,53 @@ const useWordle = (solution, setMessage) => {
         }
     };
 
-    return {turn, currentGuess, guesses, isCorrect, usedKeys, handleKeyup};
+    const handleKey = async (key) => {
+        if (isCorrect || turn > 5) return;
+      
+        if (key === 'Enter') {
+            // Only add guess if turn is less than 5
+            if (turn > 5) {
+                setMessage('You have used all your guesses!');
+                return;
+            }
+            // Do not allow duplicate guesses
+            if (history.includes(currentGuess)) {
+                setMessage('You have already guessed that word!');
+                return;
+            }
+            // Check word is 5 chars long
+            if (currentGuess.length !== 5) {
+                setMessage('Word must be 5 characters long!');
+                return;
+            }
+            // Word validation with API
+            const isValid = await validateWord(currentGuess);
+            if (!isValid) {
+              setMessage('Not a valid word.')
+              return;
+            }
+
+            const formatted = formatGuess();
+            addNewGuess(formatted);
+        }
+      
+        if (key === 'Backspace' || key === 'Delete') {
+            setCurrentGuess((prev) => {
+                return prev.slice(0, -1);
+            });
+            return;
+        }
+      
+        if (/^[A-Za-z]$/.test(key) && currentGuess.length < 5) {
+            if (currentGuess.length < 5) {
+                setCurrentGuess((prev) => {
+                    return prev + key.toLowerCase();
+                });
+            }
+        }
+    };
+
+    return {turn, currentGuess, guesses, isCorrect, usedKeys, handleKeyup, handleKey};
 };
 
 export default useWordle;
