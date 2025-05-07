@@ -1,6 +1,6 @@
 # Wordle Clone
 
-A Wordle clone built with React and Vite. It replicates the core gameplay mechanics of the original Wordle, featuring animated tile feedback, keyboard interaction, custom styling, and word validation via an external dictionary API. It uses JSON Server to provide a local list of solution words.
+A Wordle clone built with React and Vite. This project replicates the core gameplay of the original Wordle, featuring animated tile feedback, an interactive QWERTY on-screen keyboard, keyboard input support, and real-time word validation using an external dictionary API. It also uses JSON Server to supply a list of random solution words locally.
 
 ![Screenshot of Wordle Clone](public/wordle.png)
 
@@ -8,22 +8,23 @@ A Wordle clone built with React and Vite. It replicates the core gameplay mechan
 
 ## Features
 
-- 6 tries to guess a 5-letter word
-- Colored tiles for correct, misplaced, and incorrect letters
-- Keyboard and on-screen keypad input
-- Shake animation and message popup for invalid guesses
-- Word validation using [dictionaryapi.dev](https://dictionaryapi.dev)
-- Random word loaded from `db.json` using JSON Server
+- 6 tries to guess a random 5-letter word
+- QWERTY on-screen keyboard with clickable keys
+- Keys change color based on accuracy: green, yellow, or gray
+- Tile flip animations on guess submission
+- Shake animation and message popup for invalid entries
+- Word validation via [dictionaryapi.dev](https://dictionaryapi.dev)
+- Solution word fetched from a local `db.json` file using JSON Server
 - End-of-game modal with a "Play Again" button
 
 ---
 
 ## Tech Stack
 
-- React (Vite)
+- React (with Vite)
 - JSON Server
-- Custom CSS
 - Dictionary API
+- Custom CSS for animations and layout
 
 ---
 
@@ -70,7 +71,7 @@ cd wordle-clone
 npm install
 ```
 
-### 3. Start the JSON Server
+### 3. Start the JSON Server (for word list)
 
 ```bash
 npm run api
@@ -83,15 +84,6 @@ npm run dev
 ```
 
 Then open: [http://localhost:5173](http://localhost:5173)
-
----
-
-## Future Improvements
-
-- Responsive mobile layout
-- Game state persistence via localStorage
-- Stats tracking and daily word mode
-- Improved accessibility and keyboard focus
 
 ---
 
