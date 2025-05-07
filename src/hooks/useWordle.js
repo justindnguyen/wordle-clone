@@ -140,9 +140,11 @@ const useWordle = (solution, setMessage) => {
     };
 
     const handleKey = async (key) => {
+        key = key.length === 1 ? key.toLowerCase() : key;
+
         if (isCorrect || turn > 5) return;
       
-        if (key === 'Enter') {
+        if (key === 'Enter' || key === '⏎') {
             // Only add guess if turn is less than 5
             if (turn > 5) {
                 setMessage('You have used all your guesses!');
@@ -169,14 +171,14 @@ const useWordle = (solution, setMessage) => {
             addNewGuess(formatted);
         }
       
-        if (key === 'Backspace' || key === 'Delete') {
+        if (key === 'Backspace' || key === 'Delete' || key === '⌫') {
             setCurrentGuess((prev) => {
                 return prev.slice(0, -1);
             });
             return;
         }
       
-        if (/^[A-Za-z]$/.test(key) && currentGuess.length < 5) {
+        if (/^[A-Za-z]$/.test(key)) {
             if (currentGuess.length < 5) {
                 setCurrentGuess((prev) => {
                     return prev + key.toLowerCase();

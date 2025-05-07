@@ -71,31 +71,47 @@ h1 {
   max-width: 500px;
   margin: 20px auto;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.keypad-row {
+  display: flex;
   justify-content: center;
   gap: 6px;
 }
 
-.keypad > div {
-  width: 60px;
+.key {
+  width: 50px;
   height: 60px;
   background: #818384;
   color: white;
-  border-radius: 6px;
+  border-radius: 4px;
   line-height: 60px;
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   user-select: none;
-  transition: all 0.2s ease;
+  text-align: center;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.15s ease;
 }
 
-.keypad > div.green {
+.key:active {
+  transform: scale(0.95);
+}
+
+/* Color updates based on game logic */
+.key.green {
   background: #538d4e;
 }
-.keypad > div.yellow {
+
+.key.yellow {
   background: #b59f3b;
 }
-.keypad > div.grey {
+
+.key.grey {
   background: #3a3a3c;
 }
 

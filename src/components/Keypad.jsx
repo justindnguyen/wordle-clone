@@ -1,30 +1,39 @@
 import { useEffect, useState } from "react";
 
 export default function Keypad({ usedKeys, handleKey }) {
-    const [letters, setLetters] = useState(null);
+    const [rows, setRows] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:3001/letters')
-            .then(res => res.json())
-            .then(json => {
-                setLetters(json)
-        })
-    }, [])
+        const qwerty = [
+            ['q','w','e','r','t','y','u','i','o','p'],
+            ['a','s','d','f','g','h','j','k','l'],
+            ['⏎','z','x','c','v','b','n','m','⌫']
+        ];
+        setRows(qwerty);
+    }, []);
 
     return (
         <div className="keypad">
-            {letters && letters.map((letter) => {
-                const key = letter.key;
-                const color = usedKeys[letter.key];
-                const label =
-                    key === 'Enter' ? '⏎' :
-                    key === 'Backspace' || key === 'Delete' ? '⌫' :
-                    key;
-
-                return (
-                    <div key={key} className={color} onClick={() => handleKey(key)} >{label}</div>
-                );
-            })}
+            {rows.map((row, rowIndex) => (
+                <div key={rowIndex} className="keypad-row">
+                    {row.map((key) => {
+                        const color = usedKeys[key.toLowerCase()];
+                        const label =
+                            key === 'Enter' ? '⏎' :
+                            key === 'Backspace' || key === 'Delete' ? '⌫' : 
+                            key;
+                        return (
+                            <div
+                                key={key}
+                                className={`key ${color}`}
+                                onClick={() => handleKey(key)}
+                            >
+                                {label}
+                            </div>
+                        );
+                    })}
+                </div>
+            ))}
         </div>
     );
 };
